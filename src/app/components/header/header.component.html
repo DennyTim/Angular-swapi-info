@@ -1,0 +1,8 @@
+<mat-toolbar class="header-content" color="primary">
+  <span>Swapi info</span>
+  <mat-icon
+    matBadgeColor="accent"
+    [matBadge]="_countPages$ | async"
+  >description
+  </mat-icon>
+</mat-toolbar>

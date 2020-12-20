@@ -1,0 +1,50 @@
+<div
+  *ngIf="_allPlanets$ | async; let allPlanets"
+  class="planets"
+>
+  <a
+    class="planet-card"
+    *ngFor="let planet of allPlanets; let i = index"
+  >
+    <mat-card (click)="openDetailInfo(i)">
+      <mat-card-header class="planet-card__header">
+        <mat-card-title>{{ planet.name }}</mat-card-title>
+      </mat-card-header>
+      <img
+        mat-card-image
+        src="{{ planet.imageUrl }}"
+        alt="Photo of {{ planet.name }}"
+      />
+      <mat-card-content>
+        <p>
+          <span>Climate:&nbsp;</span>
+          <span>{{ planet.climate }}</span>
+        </p>
+        <p>
+          <span>Population:&nbsp;</span>
+          <span>{{ planet.population }}</span>
+        </p>
+      </mat-card-content>
+    </mat-card>
+  </a>
+</div>
+<ng-container *ngIf="_isLoadMoreHidden$ | async">
+  <div
+    class="planets-toolbar"
+    *ngrxLet="_loadingStatus$; let loading"
+  >
+    <button
+      mat-raised-button
+      *ngIf="!loading"
+      color="primary"
+      (click)="loadPlanets()"
+    >Load more
+    </button>
+    <mat-spinner
+      *ngIf="loading"
+      color="primary"
+      mode='indeterminate'
+      [diameter]="30"
+    ></mat-spinner>
+  </div>
+</ng-container>

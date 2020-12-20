@@ -1,4 +1,7 @@
+import { PersonsModel } from "./presons.model";
+
 export interface PlanetsModel {
+  id: string;
   name: string;
   rotation_period: number;
   orbital_period: number;
@@ -8,7 +11,7 @@ export interface PlanetsModel {
   terrain: string;
   surface_water: number;
   population: number;
-  residents: string[];
+  residents: string[] | PersonsModel;
   films: string[];
   created: string;
   edited: string;

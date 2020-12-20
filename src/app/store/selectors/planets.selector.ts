@@ -11,3 +11,8 @@ export const selectPlanetsList = createSelector(selectPlanetsState, (state: Plan
 export const selectAllPlanetsList = createSelector(selectPlanetsState, (state: PlanetsStateModel): Partial<PlanetsModel[]> => state.allPlanets);
 export const getNextUrl = createSelector(selectPlanetsList, (planetsInfo: Partial<PlanetsInfoModel>): string => planetsInfo.next);
 export const getPagesQuantity = createSelector(selectPlanetsState, (state: PlanetsStateModel): number => state.allPlanets.length / 10);
+export const selectedPlanet = createSelector(selectPlanetsState, (state: PlanetsStateModel): PlanetsModel => state.selectedPlanet);
+export const selectPlanetById = createSelector(
+  selectAllPlanetsList,
+  (allPlanets: Partial<PlanetsModel[]>, props: { index: number }): PlanetsModel => allPlanets[props.index]
+);

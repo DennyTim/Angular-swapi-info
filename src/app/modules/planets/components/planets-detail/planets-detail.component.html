@@ -1,1 +1,39 @@
-<p>planets-detail works!</p>
+<div class="planet-detail">
+  <ng-container *ngIf="_dataPlanet$ | async; let planet">
+    <mat-card class="planet-detail__card">
+      <mat-card-header>
+        <div
+          mat-card-avatar
+          class="planet-detail__avatar"
+          [ngStyle]="{'background-image': 'url(' + planet.imageUrl + ')'}"
+        ></div>
+        <mat-card-title>{{ planet.name }}</mat-card-title>
+      </mat-card-header>
+      <img
+        mat-card-image
+        src='{{  planet.imageUrl }}'
+        alt="{{ planet.name }}"
+      >
+    </mat-card>
+    <mat-list class="planet-detail__options">
+      <ng-container *ngFor="let param of planet | keyvalue; let i = index">
+        <ng-container *ngIf="_planetsParams.includes(param.key)">
+          <mat-list-item class="planet-detail__options-item">
+            <p class="planet-detail__options-title">{{ param.key | titlecase }}</p>
+            <p
+              *ngIf="!_isArray(param.value); else residents"
+              class="planet-detail__options-value"
+            >{{ param.value }}</p>
+            <ng-template #residents>
+              <div class="planet-detail__options-custom-value">
+                <ng-container *ngFor="let person of param.value"><p>{{ person.name }}</p></ng-container>
+              </div>
+            </ng-template>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+        </ng-container>
+      </ng-container>
+    </mat-list>
+  </ng-container>
+</div>
+

@@ -6,6 +6,7 @@ import {
 } from "@ngrx/effects";
 import { PlanetsRequestService } from "../../services/planets-request.service";
 import { EMPTY } from "rxjs";
+import { cloneDeep } from 'lodash';
 import {
   catchError,
   map,
@@ -14,6 +15,7 @@ import {
 } from "rxjs/operators";
 import {
   loadMorePlanetsSuccess,
+  loadPlanetByIdSuccess,
   loadPlanetsSuccess,
   PlanetsActions
 } from "../actions/planets.actions";
@@ -24,6 +26,8 @@ import {
 import { getNextUrl } from "../selectors/planets.selector";
 import { MainState } from "../index";
 import { PlanetsInfoModel } from "../../models/planets-state.model";
+import { PlanetsModel } from "../../models/planets.model";
+import { PersonsModel } from "../../models/presons.model";
 
 @Injectable()
 export class PlanetsEffect {
@@ -44,6 +48,28 @@ export class PlanetsEffect {
             catchError(() => EMPTY)
           )
     )
+  ));
+
+  loadPlanetById$ = createEffect(() => this.actions$.pipe(
+    ofType(PlanetsActions.loadPlanetById),
+    mergeMap(({ id }: { id: number }) =>
+      this.planetsService.getPlanetsById(id)
+          .pipe(catchError(() => EMPTY))
+    ),
+    mergeMap((planet: PlanetsModel) => {
+      return this.planetsService.getPersonsByBulkFetching(planet.residents)
+                 .pipe(
+                   map((residents: PersonsModel[]) => {
+                     return loadPlanetByIdSuccess({
+                       selectedPlanet: cloneDeep({
+                         ...planet,
+                         residents: residents as any
+                       })
+                     })
+                   }),
+                   catchError(() => EMPTY)
+                 )
+    })
   ));
 
   loadMorePlanets$ = createEffect(() => this.actions$.pipe(

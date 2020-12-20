@@ -3,9 +3,9 @@ import {
   Component,
   OnInit
 } from '@angular/core';
-import { Observable } from "rxjs";
 import { PlanetsStateService } from "./services/planets-state.service";
-import { PlanetsModel } from "../../models/planets.model";
+import { Observable } from "rxjs";
+import { pluck } from "rxjs/operators";
 
 @Component({
   selector: 'app-planets',
@@ -15,21 +15,13 @@ import { PlanetsModel } from "../../models/planets.model";
   providers: [ PlanetsStateService ]
 })
 export class PlanetsComponent implements OnInit {
-  public _allPlanets$: Observable<Partial<PlanetsModel[]>>;
-  public _loadingStatus$: Observable<boolean>;
-  public _isLoadMoreHidden$: Observable<boolean>;
+  public currentPlanetName$: Observable<string>;
 
-  constructor(private planetsService: PlanetsStateService) {
+  constructor(private planetsStateService: PlanetsStateService) {
   }
 
   ngOnInit(): void {
-    this.planetsService.loadPlanets();
-    this._allPlanets$ = this.planetsService.getPlanets();
-    this._loadingStatus$ = this.planetsService.getLoadingStatus();
-    this._isLoadMoreHidden$ = this.planetsService.isLoadMoreHidden();
-  }
-
-  loadPlanets() {
-    this.planetsService.getMorePlanets();
+    this.currentPlanetName$ = this.planetsStateService.getPlanetById()
+                                  .pipe(pluck('name'));
   }
 }

@@ -23,10 +23,10 @@ export class ShowLoadingInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     this.loadingService.showLoading();
 
-    return timer(500)
+    return timer(200)
       .pipe(concatMap(() =>
         next.handle(request)
             .pipe(finalize(() => this.loadingService.hideLoading()))
-    ))
+      ))
   }
 }

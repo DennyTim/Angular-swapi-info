@@ -10,4 +10,5 @@ export interface PlanetsInfoModel {
 export interface PlanetsStateModel {
   planetsInfo: Partial<PlanetsInfoModel>;
   allPlanets: Partial<PlanetsModel[]>;
+  selectedPlanet: PlanetsModel;
 }

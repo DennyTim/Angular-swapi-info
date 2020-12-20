@@ -4,9 +4,9 @@ import {
   Routes
 } from "@angular/router";
 import { PlanetsComponent } from "./planets.component";
-import { PlanetsPreviewComponent } from "./components/planets-preview/planets-preview.component";
-import { PlanetsDetailComponent } from "./components/planets-detail/planets-detail.component";
 import { PlanetsResolver } from "./services/planets.resolver";
+import { PlanetsDetailComponent } from "./components/planets-detail/planets-detail.component";
+import { PlanetsListComponent } from "./components/planets-list/planets-list.component";
 
 const routes: Routes = [
   {
@@ -15,12 +15,14 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: PlanetsPreviewComponent
+        component: PlanetsListComponent,
+        pathMatch: 'full',
       },
       {
         path: ':id',
         component: PlanetsDetailComponent,
-        resolve: [ PlanetsResolver ]
+        resolve: { planet: PlanetsResolver },
+        pathMatch: 'full',
       },
     ]
   }

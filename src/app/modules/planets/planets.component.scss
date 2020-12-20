@@ -1,26 +1,5 @@
-.planets {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-  grid-gap: 10px;
-}
-
-.planets-toolbar {
-  padding: 10px 0;
-  display: flex;
-  justify-content: center;
-}
-
-.planet-card {
-  &__header {
-    margin: 5px 0 10px;
-    align-items: center;
-  }
-
-  .mat-card-header .mat-card-title {
-    margin-bottom: 0;
-  }
-}
-
-.planet-header-image {
-  background-size: cover;
+.planets-header {
+  margin-top: 8rem;
+  font-size: 24px;
+  color: #ffffff;
 }

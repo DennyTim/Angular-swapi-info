@@ -25,12 +25,15 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { ShowLoadingInterceptor } from "./interceptors/show-loading.interceptor";
+import { ReactiveComponentModule } from "@ngrx/component";
+import { ErrorPageComponent } from './components/error-page/error-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    ErrorPageComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +49,8 @@ import { ShowLoadingInterceptor } from "./interceptors/show-loading.interceptor"
     MatToolbarModule,
     MatIconModule,
     MatSidenavModule,
-    MatBadgeModule
+    MatBadgeModule,
+    ReactiveComponentModule
   ],
   providers: [
     {

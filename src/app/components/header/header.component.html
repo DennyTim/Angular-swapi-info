@@ -1,8 +1,11 @@
 <mat-toolbar class="header-content" color="primary">
   <a class="header-logo" routerLink="/">Swapi info</a>
-  <mat-icon
-    matBadgeColor="accent"
-    [matBadge]="_countPages$ | async"
-  >description
-  </mat-icon>
+  <ng-container *ngrxLet="_routeEvent$ as routerEvent">
+      <mat-icon
+        *ngIf="routerEvent['url'] === '/planets' || routerEvent['url'] === '/'"
+        matBadgeColor="accent"
+        [matBadge]="_countPages$ | async"
+      >description
+      </mat-icon>
+  </ng-container>
 </mat-toolbar>

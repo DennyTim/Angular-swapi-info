@@ -10,6 +10,14 @@ import {
 } from "@ngrx/store";
 import { getPagesQuantity } from "../../store/selectors/planets.selector";
 import { Observable } from "rxjs";
+import {
+  NavigationStart,
+  Router
+} from "@angular/router";
+import {
+  distinctUntilChanged,
+  filter
+} from "rxjs/operators";
 
 @Component({
   selector: 'app-header',
@@ -19,11 +27,18 @@ import { Observable } from "rxjs";
 })
 export class HeaderComponent implements OnInit {
   public _countPages$: Observable<number>;
+  public _routeEvent$: Observable<NavigationStart>;
 
-  constructor(private store: Store<MainState>) {
+  constructor(
+    private store: Store<MainState>,
+    public router: Router,
+  ) {
   }
 
   ngOnInit(): void {
-    this._countPages$ = this.store.pipe(select(getPagesQuantity));
+    this._countPages$ = this.store.pipe(select(getPagesQuantity), distinctUntilChanged());
+    this._routeEvent$ = this.router.events.pipe(
+      filter((event: NavigationStart) => event instanceof NavigationStart),
+    )
   }
 }

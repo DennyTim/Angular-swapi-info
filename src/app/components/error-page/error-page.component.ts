@@ -15,14 +15,15 @@ import { Observable } from "rxjs";
   styleUrls: [ './error-page.component.scss' ]
 })
 export class ErrorPageComponent implements OnInit {
-  private errorMessage$: Observable<string>;
+  public _errorMessage$: Observable<string>;
 
   constructor(private route: ActivatedRoute) {
   }
 
   ngOnInit() {
-    this.errorMessage$ = this.route.data.pipe(pluck('message'), map((message: string) =>
-      message || this.route.snapshot.data['message']
-    ));
+    this._errorMessage$ = this.route.data.pipe(
+      pluck('message'),
+      map((message: string) =>  message || this.route?.snapshot?.data['message'])
+    );
   }
 }

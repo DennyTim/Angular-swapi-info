@@ -1,1 +1,5 @@
-<h1 class="mat-h1 error-message">{{ errorMessage$ | async }}</h1>
+<ng-container *ngrxLet="_errorMessage$ as errorMessage">]
+  <h1 class="mat-h1 error-message">{{ errorMessage }}</h1>
+</ng-container>
+
+

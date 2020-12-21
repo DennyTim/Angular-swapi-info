@@ -4,9 +4,9 @@
 >
   <a
     class="planet-card"
-    *ngFor="let planet of allPlanets; let i = index"
+    *ngFor="let planet of allPlanets"
   >
-    <mat-card (click)="openDetailInfo(i)">
+    <mat-card (click)="openDetailInfo(planet.url)">
       <mat-card-header class="planet-card__header">
         <mat-card-title>{{ planet.name }}</mat-card-title>
       </mat-card-header>

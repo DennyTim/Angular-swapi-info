@@ -1,7 +1,1 @@
-<ng-container *ngIf="currentPlanetName$ | async; let name; else plainHeader">
-  <h2 class="planets-header">Select planet:&nbsp;{{ name }}</h2>
-</ng-container>
-<ng-template #plainHeader>
-  <h2 class="planets-header">Please select planet</h2>
-</ng-template>
 <router-outlet></router-outlet>

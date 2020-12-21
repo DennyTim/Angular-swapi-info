@@ -1,4 +1,4 @@
-<div class="planet-detail">
+<div class="planet-detail" *ngrxLet="_planetId$ as planetUrl">
   <ng-container *ngIf="_dataPlanet$ | async; let planet">
     <mat-card class="planet-detail__card">
       <mat-card-header>
@@ -17,17 +17,28 @@
     </mat-card>
     <mat-list class="planet-detail__options">
       <ng-container *ngFor="let param of planet | keyvalue; let i = index">
-        <ng-container *ngIf="_planetsParams.includes(param.key)">
-          <mat-list-item class="planet-detail__options-item">
+        <ng-container *ngIf="_planetsParams.includes(param.key) && param.value">
+          <mat-list-item *ngIf="param.value" class="planet-detail__options-item">
             <p class="planet-detail__options-title">{{ param.key | titlecase }}</p>
             <p
               *ngIf="!_isArray(param.value); else residents"
               class="planet-detail__options-value"
             >{{ param.value }}</p>
             <ng-template #residents>
-              <div class="planet-detail__options-custom-value">
-                <ng-container *ngFor="let person of param.value"><p>{{ person.name }}</p></ng-container>
+              <div
+                *ngIf="param.value.length > 0; else emptyList"
+                class="planet-detail__options-custom-list"
+              >
+                <ng-container *ngFor="let person of param.value; let i = index;">
+                  <p
+                    class="planet-detail__options-custom-value"
+                    (click)="openResidentInfo(planetUrl['id'], person)"
+                  >{{ person.name }}</p>
+                </ng-container>
               </div>
+              <ng-template #emptyList>
+                <p class="planet-detail__options-value">Residents aren't exist</p>
+              </ng-template>
             </ng-template>
           </mat-list-item>
           <mat-divider></mat-divider>

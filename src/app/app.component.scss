@@ -33,13 +33,15 @@ body {
 
 .container {
   max-width: 128rem;
-  margin: 1rem auto;
-  min-height: 100vh;
+  margin: 8rem auto;
+  min-height: 70vh;
 
   @media only screen and (max-width: $bp-largest) {
-    margin: 0;
+    padding: 0 1.5rem;
+    margin-top: 8rem;
     max-width: 100%;
     width: 100%;
+    min-height: 75vh;
   }
 }
 

@@ -12,6 +12,7 @@ import { PlanetsRoutingModule } from "./planets-routing.module";
 import { PlanetsComponent } from './planets.component';
 import { PlanetsDetailComponent } from './components/planets-detail/planets-detail.component';
 import { PlanetsListComponent } from './components/planets-list/planets-list.component';
+import { PlanetResidentsComponent } from './components/planet-residents/planet-residents.component';
 
 @NgModule({
   imports: [
@@ -30,6 +31,7 @@ import { PlanetsListComponent } from './components/planets-list/planets-list.com
     PlanetsComponent,
     PlanetsDetailComponent,
     PlanetsListComponent,
+    PlanetResidentsComponent,
   ]
 })
 export class PlanetsModule {

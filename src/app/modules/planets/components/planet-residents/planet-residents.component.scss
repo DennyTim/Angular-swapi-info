@@ -1,6 +1,5 @@
-.planet-detail {
+.person {
   display: flex;
-
   .mat-list-base .mat-list-item, .mat-list-base .mat-list-option {
     padding: 10px 0;
     height: auto;
@@ -15,7 +14,8 @@
     display: none;
   }
 
-  &__card {
+  .person-card {
+    max-width: 400px;
     flex-basis: 30%;
   }
 
@@ -31,25 +31,6 @@
     &-value {
       flex-grow: 1;
     }
-
-    &-custom-list {
-      display: flex;
-      flex-direction: column;
-    }
-
-    &-custom-value {
-      color: #e91e63;
-      cursor: pointer;
-      transition: 0.4s ease-in-out;
-    }
-
-    &-custom-value:hover {
-      color: #fff;
-    }
-  }
-
-  &__avatar {
-    background-size: cover;
   }
 }
 

@@ -1,0 +1,25 @@
+<ng-container *ngrxLet="_residents$; let resident">
+  <div class="person">
+    <mat-card class="person-card">
+      <mat-card-header>
+        <mat-card-title>{{ resident.name }}</mat-card-title>
+      </mat-card-header>
+      <img
+        mat-card-image
+        src="https://www.flaticon.com/svg/static/icons/svg/1077/1077012.svg"
+        alt="{{ resident.name }}"
+      >
+    </mat-card>
+    <mat-list class="person__options">
+      <ng-container *ngFor="let param of resident | keyvalue">
+        <ng-container *ngIf="_residentsField.includes(param.key) && param.value">
+          <mat-list-item class="person__options-item">
+            <p class="person__options-title">{{ param.key | titlecase }}</p>
+            <p class="person__options-value">{{ param.value }}</p>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+        </ng-container>
+      </ng-container>
+    </mat-list>
+  </div>
+</ng-container>

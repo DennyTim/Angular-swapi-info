@@ -1,7 +1,8 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  OnInit
+  OnInit,
+  ViewEncapsulation
 } from '@angular/core';
 import { PlanetsStateService } from "../../services/planets-state.service";
 import { Observable } from "rxjs";
@@ -15,7 +16,7 @@ import {
   selector: 'app-planets-list',
   templateUrl: './planets-list.component.html',
   styleUrls: [ './planets-list.component.scss' ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PlanetsListComponent implements OnInit {
   public _allPlanets$: Observable<Partial<PlanetsModel[]>>;
@@ -40,8 +41,10 @@ export class PlanetsListComponent implements OnInit {
     this.planetsService.getMorePlanets();
   }
 
-  async openDetailInfo(index: number): Promise<void> {
-    const id = index + 1;
+  async openDetailInfo(planetUrl: string): Promise<void> {
+    const planetParams = planetUrl.split('/')
+                                  .filter(item => item);
+    const id = Number(planetParams[planetParams.length - 1]);
     try {
       const isNavigate = await this.router.navigate(
         [ `/planets/${ id }` ],

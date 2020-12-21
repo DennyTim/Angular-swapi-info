@@ -7,6 +7,8 @@ import { PlanetsComponent } from "./planets.component";
 import { PlanetsResolver } from "./services/planets.resolver";
 import { PlanetsDetailComponent } from "./components/planets-detail/planets-detail.component";
 import { PlanetsListComponent } from "./components/planets-list/planets-list.component";
+import { PlanetResidentsComponent } from "./components/planet-residents/planet-residents.component";
+import { ResidentsResolver } from "./services/residents.resolver";
 
 const routes: Routes = [
   {
@@ -24,6 +26,12 @@ const routes: Routes = [
         resolve: { planet: PlanetsResolver },
         pathMatch: 'full',
       },
+      {
+        path: ':id/residents/:userId',
+        component: PlanetResidentsComponent,
+        resolve: { residents: ResidentsResolver },
+        pathMatch: 'full',
+      }
     ]
   }
 ];

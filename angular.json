@@ -118,6 +118,14 @@
               "devServerTarget": "swapi-info:serve:production"
             }
           }
+        },
+        "deploy": {
+          "builder": "@netlify-builder/deploy:deploy",
+          "options": {
+            "outputPath": "dist/swapi-info",
+            "netlifyToken": "PxaQqMWf8HyarahYyDMIQyILW5oxIFJKZXwCEujPKbM",
+            "siteId": "d1428846-2f37-4e5d-acb4-106342f15a31"
+          }
         }
       }
     }
